@@ -25,6 +25,17 @@ function activate(context) {
             if (obj["config"] && obj["path"] && obj["project"]) {
                 if(!iar)
                     iar = new Iar(resolve(obj.path), resolve(obj.project), obj.config, folder);
+                else
+				{
+					iar.path = resolve(obj.path);
+					iar.project = resolve(obj.project);
+					iar.config = obj.config;
+					iar.folder = folder;
+                    if(typeof obj.parallel === 'boolean')
+                    {
+						iar.parallel = obj.parallel;
+                    }
+				}
                 if(iar.in_progress() == false)
                     iar.build();
             }
